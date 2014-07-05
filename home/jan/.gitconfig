@@ -1,0 +1,9 @@
+[color]
+	ui = true
+[user]
+	name = Jan Zipfler
+	email = zipfler.j@gmail.com
+[push]
+	default = simple
+[merge]
+	tool = meld

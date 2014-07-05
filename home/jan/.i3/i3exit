@@ -1,0 +1,36 @@
+#!/bin/sh
+
+lock() {
+    i3lock -b -t -i ~/Bilder/Wallpaper/Arch/wallpaper-two.png
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes' 'i3-msg exit'
+        #while [ "$select" != "NO" -a "$select" != "YES" ]; do
+          #select=$(echo -e 'NO\nYES' | dmenu -b -nf '#10b010' -sb '#10b010' -sf '#000000' -nb '#000000' -fn 'font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1' -i -p 'Do you really want to exit i3? This will end your X session.')
+          #[ -z "$select" ] && exit 0
+        #done
+        #[ "$select" = "YES" ] && i3-msg exit
+        ;;
+    suspend)
+        lock && systemctl suspend
+        ;;
+    hibernate)
+        lock && systemctl hibernate
+        ;;
+    reboot)
+        i3-nagbar -m 'Do you really want to reboot the computer?' -b 'Yes' 'systemctl reboot'
+        ;;
+    shutdown)
+        i3-nagbar -m 'Do you really want to shutdown the computer?' -b 'Yes' 'systemctl poweroff'
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

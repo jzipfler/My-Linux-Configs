@@ -1,0 +1,37 @@
+#!/bin/bash
+VAR=~/.i3/hdmi
+SND=~/.asoundrc
+LVDSDPI=96
+HDMIDPI=$LVDSPI
+source $VAR
+
+if xrandr -q | grep -q "HDMI1 connected"; then
+   if [ $HDMI == off ]; then
+      if [ -f $SND.off ]; then
+         mv $SND.off $SND
+      fi
+      xrandr --output HDMI1 --auto --noprimary --same-as LVDS1 --primary --dpi $LVDSDPI
+      echo HDMI=same > $VAR
+   elif [ $HDMI == same ]; then
+      if [ -f $SND.off ]; then
+         mv $SND.off $SND
+      fi
+      xrandr --output HDMI1 --auto --noprimary --left-of LVDS1 --primary --dpi $LVDSDPI
+      echo HDMI=left > $VAR
+   elif [ $HDMI == left ]; then
+      if [ -f $SND ]; then
+         mv $SND $SND.off
+      fi
+      xrandr --output HDMI1 --off --output LVDS1 --primary --dpi $LVDSDPI
+      echo HDMI=off > $VAR
+   fi
+else xrandr -q | grep -q "HDMI1 disconnected";
+   if [ -f $SND ]; then
+      mv $SND $SND.off
+   fi
+   xrandr --output HDMI1 --off --output LVDS1 --primary --dpi $LVDSDPI
+   echo HDMI=off > $VAR
+fi
+
+#source hdmi
+#echo $HDMI

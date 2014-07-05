@@ -1,0 +1,80 @@
+#
+# Allgemeine aliase für bash und zsh
+#
+
+#
+# VIEL VIEL mehr aliase unter /usr/lib/prezto/
+#
+
+
+# a short alias for yaourt
+alias yauu="yaourt -Syau"
+alias yauunc="yaourt -Syau --noconfirm"
+
+# pacman aliases (if desired, adapt for your favourite AUR helper)
+alias pac="sudo /usr/bin/pacman -S"		# default action	- install one or more packages
+alias pacu="sudo /usr/bin/pacman -Syu"		# '[u]pdate'		- upgrade all packages to their newest version
+alias pacr="sudo /usr/bin/pacman -Rns"		# '[r]emove'		- uninstall one or more packages
+alias pacs="/usr/bin/pacman -Ss"		# '[s]earch'		- search for a package using one or more keywords
+alias paci="/usr/bin/pacman -Si"		# '[i]nfo'		- show information about a package
+alias paclo="/usr/bin/pacman -Qdt"		# '[l]ist [o]rphans'	- list all packages which are orphaned
+alias pacc="sudo /usr/bin/pacman -Scc"		# '[c]lean cache'	- delete all not currently installed package files
+alias paclf="/usr/bin/pacman -Ql"		# '[l]ist [f]iles'	- list all files installed by a given package
+alias pacexpl="sudo /usr/bin/pacman -D --asexp"	# 'mark as [expl]icit'	- mark one or more packages as explicitly installed 
+alias pacimpl="sudo /usr/bin/pacman -D --asdep"	# 'mark as [impl]icit'	- mark one or more packages as non explicitly installed
+
+# '[r]emove [o]rphans' - recursively remove ALL orphaned packages
+alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+
+# Some sudo aliase
+alias reboot='sudo systemctl reboot'
+alias poweroff='sudo systemctl poweroff'
+
+alias pacman='sudo pacman'
+alias systemctl='sudo systemctl'
+
+# Startet vim im ReadOnly Modus...
+# Vorteil gegenueber von view ist das Syntax-Highlighting
+alias view='vim -R'
+
+
+# Push and pop directories on directory stack
+alias pu='pushd'
+alias po='popd'
+alias dirs='dirs -v'
+
+# Super user
+alias _='sudo'
+
+#alias g='grep -in'
+
+# List direcory contents
+#alias sl=ls
+alias lk='ls -lSr'
+alias ls='ls --color=auto --group-directories-first --quoting-style=shell'
+alias lss='du -kh --max-depth=1 | sort -nr | less '
+
+# ARCH
+# list orphans
+#alias lsorhpans='sudo pacman -Qqdt'
+# remove orphans
+#alias rmorphans='sudo pacman -Rs $(pacman -Qtdq)'
+# Remove the specified package(s), its configuration(s) and unneeded dependencies
+#alias pacrem='sudo pacman -Rns'
+# list local packages with size
+#alias paclist="LC_ALL=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
+
+
+alias ..="cd .."
+
+alias c="clear"
+
+# Krams
+
+#alias o='gnome-open'        # "o datei" öffnet datei mit dem Gnome-Standardprogramm
+alias pg='ps aux | grep'      # Prozess greppen -> pg name
+alias h='history'
+#alias du='du -kh' # lesbarer Output
+alias ps='ps auxf'
+alias x='exit'
+
