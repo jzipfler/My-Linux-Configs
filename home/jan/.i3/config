@@ -316,6 +316,17 @@ bindsym Print exec scrot ~/Bilder/Screenshot/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym $mod+Print exec sleep 1 && scrot -s ~/Bilder/Screenshot/screenshot_%Y_%m_%d_%H_%M_%S.png
 
 
+# Bildschirmhelligkeit aendern
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+#bindcode 232 exec xbacklight -dec 10
+bindsym $mod+Shift+b exec xbacklight -dec 10
+
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindcode 233 exec xbacklight -inc 10
+bindsym $mod+b exec xbacklight -inc 10
+
 # Exec
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id nm-applet
