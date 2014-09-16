@@ -20,3 +20,6 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Next line was a hint for the use with Skype...
 #export PULSE_LATENCY_MSEC=60
+
+# OPAM configuration
+. /home/jan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
