@@ -1,6 +1,6 @@
-# Load the global alias file
-source /etc/aliases
-
 source /etc/zsh/zpreztorc
 source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
+
+# Load the global alias file
+source /etc/aliases
