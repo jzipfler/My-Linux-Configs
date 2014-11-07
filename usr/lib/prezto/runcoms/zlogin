@@ -15,8 +15,10 @@
 } &!
 
 # Print a random, hopefully interesting, adage.
+# Not needed because it is handled elsewhere
 #if (( $+commands[fortune] )); then
-#  fortune -a
-#  print
+#  if [[ -t 0 || -t 1 ]]; then
+#    fortune -s
+#    print
+#  fi
 #fi
-
