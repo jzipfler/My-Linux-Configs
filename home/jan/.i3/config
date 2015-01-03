@@ -198,6 +198,7 @@ bar {
         workspace_buttons true
         output LVDS1
         output HDMI1
+        output VGA1
         tray_output LVDS1
         colors {
                 # colorclass            border   backgr.  text
@@ -217,6 +218,7 @@ bar {
         workspace_buttons false
         output LVDS1
         output HDMI1
+        output VGA1
         tray_output none
         colors {
                 # colorclass            border   backgr.  text
