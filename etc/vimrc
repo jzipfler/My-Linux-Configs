@@ -73,3 +73,6 @@ set tabstop=2
 
 " Show tabs with the :set list
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
+" Set the color to the desert predifinition
+color desert
