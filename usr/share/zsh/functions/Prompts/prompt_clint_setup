@@ -10,6 +10,37 @@ prompt_clint_help () {
 EOF
 }
 
+PRIMARY_FG=black
+
+# Characters
+PLUSMINUS="\u00b1"
+BRANCH="\ue0a0"
+DETACHED="\u27a6"
+CROSS="\u2718"
+LIGHTNING="\u26a1"
+
+# Git: branch/detached head, dirty status
+prompt_git() {
+  local ref
+  is_dirty() {
+    test -n "$(git status --porcelain --ignore-submodules)"
+  }
+  ref="$vcs_info_msg_0_"
+  if [[ -n "$ref" ]]; then
+    if is_dirty; then
+      ref="${ref} $PLUSMINUS"
+    else
+      ref="${ref}"
+    fi
+    if [[ "${ref/.../}" == "$ref" ]]; then
+      ref="$BRANCH $ref"
+    else
+      ref="$DETACHED ${ref/.../}"
+    fi
+    print -Pn " $ref"
+  fi
+}
+
 prompt_clint_setup () {
   local -a pcc
   local -A pc
@@ -40,7 +71,7 @@ prompt_clint_setup () {
   [[ -n "$WINDOW" ]] && p_win="$pc['\(']%F{$pcc[4]}$WINDOW$pc['\)']"
 
   p_userpwd="$pc['<']%F{$pcc[3]}%n@%m$p_win%F{$pcc[5]}:%F{$pcc[4]}%~$pc['>']"
-  p_vcs="%(2v.%U%2v%u.)"
+  p_vcs="%(2v.%2v%u .)"
 
   #p_shlvlhist="%fzsh%(2L./$SHLVL.) %B%h%b "
   p_rc="%(?..[%?%1v] )"
@@ -68,7 +99,7 @@ prompt_clint_precmd () {
   [[ -o interactive ]] && jobs -l
 
   vcs_info
-  [[ -n $vcs_info_msg_0_ ]] && psvar[2]="$vcs_info_msg_0_"
+  [[ -n $vcs_info_msg_0_ ]] && psvar[2]=$(prompt_git)
 }
 
 prompt_clint_setup "$@"
