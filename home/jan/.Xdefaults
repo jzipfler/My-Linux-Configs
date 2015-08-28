@@ -1,0 +1,100 @@
+URxvt.saveLines: 1000
+URxvt.scrollBar: false
+URxvt.foreground: white
+URxvt.background: grey10
+
+URxvt*.transparent: false
+URxvt.secondaryScroll: true
+
+#include ".Xdefaults.solarizedTheme"
+
+! Font
+! The "Droid Sans Mono for Powerline" can be found in a seperate GitHub repo
+! and can be used for the Airline vim plugin (status bar)
+URxvt*font: xft:Droid Sans Mono for Powerline:style=Regular:pixelsize=16
+!URxvt*font: xft:Droid Sans Mono:style=Regular:pixelsize=16
+! URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=16
+
+!Disable anti alaising for Xft fonts to speed the terminal up a bit.
+Xft.antialias: true
+
+URxvt.perl-lib: /usr/lib/urxvt/perl/
+URxvt.perl-ext-common: default,tabbedex,clipboard,url-select
+
+!Settings for matcher
+!URxvt.urlLauncher: /usr/bin/opera
+!URxvt.url-launcher: opera
+!URxvt.matcher.button: 1
+!Define colors to highlight links
+!URxvt.matcher.rend.0: Uline Bold fg5
+
+!Settings for keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:active
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!CONTROLS:
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!h/j/k/l:    Move cursor left/down/up/right (also with arrow keys)
+!g/G/0/^/$/H/M/L/f/F/;/,/w/W/b/B/e/E: More vi-like cursor movement keys
+!'/'/?:      Start forward/backward search
+!n/N:        Repeat last search, N: in reverse direction
+!Ctrl-f/b:   Scroll down/up one screen
+!Ctrl-d/u:   Scroll down/up half a screen
+!v/V/Ctrl-v: Toggle normal/linewise/blockwise selection
+!y/Return:   Copy selection to primary buffer, Return: deactivate afterwards
+!q/Escape:   Deactivate keyboard selection mode
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!Settings for url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+!URxvt.url-select.autocopy:  if set to true, selected URLs are automatically
+!                            copied to the PRIMARY buffer
+!URxvt.url-select.button:    mouse button to click-open URLs (default: 2)
+URxvt.url-select.launcher: opera
+URxvt.url-select.underline: true
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!CONTROLS:
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!j/k:      Select next downward/upward URL (also with arrow keys)
+!g/G:      Select first/last URL (also with home/end key)
+!o/Return: Open selected URL in browser, Return: deactivate afterwards
+!y:        Copy (yank) selected URL and deactivate selection mode
+!q/Escape: Deactivate URL selection mode
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+URxvt*inheritPixmap: false
+URxvt*shading: 70
+
+! Disable unicode hex entry binding (C-S) ;)
+URxvt*iso14755:             false
+URxvt*iso14755_52:          false
+
+! Clipboard Bindings
+URxvt.keysym.C-S-C:         perl:clipboard:copy
+URxvt.keysym.C-S-V:         perl:clipboard:paste
+URxvt.keysym.C-S-P:         perl:clipboard:paste_escaped
+! URxvt.keysym.M-c:   perl:clipboard:copy
+! URxvt.keysym.M-v:   perl:clipboard:paste
+
+! Configuration for the fullscreen key binding
+! URxvt.keysym.F11: perl:fullscreen:switch
+
+! Configuration for tabs
+URxvt.keysym.Control-t: perl:tabbedex:new_tab
+URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+! See the "man urxvt" section "COLOURS AND GRAPHICS" for the color definitions
+URxvt.tabbed.tabbar-fg: 6
+URxvt.tabbed.tabbar-bg: -1
+URxvt.tabbed.title-fg: 0
+URxvt.tabbed.title-bg: 8
+URxvt.tabbed.tab-fg: 0
+URxvt.tabbed.tab-bg: 6
+URxvt.tabbed.autohide: true
+URxvt.tabbed.new-button:  false
+URXvt.tabbed.reopen-on-close: yes
+URxvt.tabbed.title: yes
+URxvt.tabbed.secondaryScroll: true
+URxvt.tabbed.font: xft:Bitstream Vera Sans Mono:pixelsize=12
+
