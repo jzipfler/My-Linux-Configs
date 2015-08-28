@@ -9,7 +9,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+# Mod1 is the Alt key
+# Mod4 is the Windows key.
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -38,7 +40,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindcode $mod+47 focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -50,7 +52,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindcode $mod+Shift+47 move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -84,17 +86,21 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-
+#Set workspace names
 set $work1 1    www
-set $work2 2   file
-set $work3 3  media
+set $work2 2   mail
+set $work3 3   term
 set $work4 4   term
 set $work5 5   code
 set $work6 6   code
 set $work7 7     im
 set $work8 8    doc
 set $work9 9   down
-set $work10 10  mov
+set $work10 10 secondary
+
+#Set values for accessing the primary and secondary monitor
+set $primaryMonitor DP-1
+set $secondaryMonitor DP-2
 
 # switch to workspace
 bindsym $mod+1 workspace $work1
@@ -159,36 +165,40 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-set $color01 #aaddaa
-set $color02 #cc0022
-set $color03 #000000
-set $color04 #10b010
-set $color05 #001500
-set $color06 #880000
-set $color07 #339933
-set $color08 #bbbbbb
-set $color09 #33cc33
-set $color10 #bb5533
-set $color11 #40b050
-set $color12 #336633
-
+set $lightGreen #aaddaa
+set $darkRed #cc0022
+set $black #000000
+set $mediumGreen #10b010
+set $blackGreen #002500
+set $darkerRed #880000
+set $darkGreen #339933
+set $lightGrey #bbbbbb
+set $grassGreen #33cc33
+set $redOrange #bb5533
+set $darkerGreen #40b050
+set $darkestGreen #336633
+set $turquioseBlue #009c9c
+set $darkTurquiose #005555
+set $lightBlue #66B2FF
+set $grey #777777
+set $white #ffffff
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -nf "$color04" -sb "$color04" -sf "$color03" -nb "$color03"'
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu -b -i -nf "$color04" -sb "$color04" -sf "$color03" -nb "$color03"'
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -nf "$mediumGreen" -sb "$mediumGreen" -sf "$black" -nb "$black"'
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu -b -i -nf "$mediumGreen" -sb "$mediumGreen" -sf "$black" -nb "$black"'
 
 
 # Colors
 # class                 border   backgr.  text     indicator
-client.focused          $color01 $color04 $color03 $color10
-client.focused_inactive $color01 $color05 $color07 $color10
-client.unfocused        $color01 $color03 $color08 $color10
-client.urgent           $color02 $color06 $color09 $color10
-client.background       $color03
+client.focused          $turquioseBlue $turquioseBlue $black $redOrange
+client.focused_inactive $turquioseBlue $darkTurquiose $darkGreen $redOrange
+client.unfocused        $turquioseBlue $darkTurquiose $lightGrey $redOrange
+client.urgent           $darkRed $darkerRed $lightGrey $redOrange
+client.background       $black
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -196,64 +206,80 @@ bar {
         status_command i3status -c ~/.i3/i3status_top.conf
         position top
         workspace_buttons true
-        output LVDS1
-        output HDMI1
-        output VGA1
-        tray_output LVDS1
+#        output LVDS1
+	#output DP-2
+	output $primaryMonitor
+  #output HDMI1
+        tray_output $primaryMonitor
         colors {
                 # colorclass            border   backgr.  text
-                background              $color03
-                statusline              $color11
-                separator               $color12
-                focused_workspace       $color01 $color04 $color03
-                active_workspace        $color01 $color11 $color03
-                inactive_workspace      $color12 $color03 $color07
-                urgent_workspace        $color02 $color06 $color09
+                background              $black
+                statusline              $lightBlue
+                separator               $lightBlue
+                focused_workspace       $turquioseBlue $turquioseBlue $black
+                active_workspace        $darkTurquiose $darkTurquiose $lightGrey
+                inactive_workspace      $darkTurquiose $black $lightGrey
+                urgent_workspace        $darkRed $darkerRed $white
         }
 }
 
-bar {
-        status_command py3status -c ~/.i3/i3status_bottom.conf
-        position bottom
-        workspace_buttons false
-        output LVDS1
-        output HDMI1
-        output VGA1
-        tray_output none
-        colors {
-                # colorclass            border   backgr.  text
-                background              $color03
-                statusline              $color11
-                separator               $color12
-                focused_workspace       $color01 $color04 $color03
-                active_workspace        $color01 $color11 $color03
-                inactive_workspace      $color12 $color03 $color07
-                urgent_workspace        $color02 $color06 $color09
-        }
-}
+#bar {
+#        status_command py3status -c ~/.i3/i3status_bottom.conf
+#        position bottom
+#        workspace_buttons false
+#        output $primaryMonitor
+#	output DP-2
+#        output HDMI1
+#        tray_output none
+#        colors {
+#                # colorclass            border   backgr.  text
+#                background              $black
+#                statusline              $darkerGreen
+#                separator               $darkestGreen
+#                focused_workspace       $lightGreen $mediumGreen $black
+#                active_workspace        $lightGreen $darkerGreen $black
+#                inactive_workspace      $darkestGreen $black $darkGreen
+#                urgent_workspace        $darkRed $darkerRed $grassGreen
+#        }
+#}
 
-# Workspaces
-workspace "$work10" output HDMI1
-workspace "$work10" output VGA1
+# Assign Workspaces to monitors
+workspace "$work1" output $primaryMonitor
+workspace "$work2" output $primaryMonitor
+workspace "$work3" output $primaryMonitor
+workspace "$work4" output $primaryMonitor
+workspace "$work5" output $primaryMonitor
+workspace "$work6" output $primaryMonitor
+workspace "$work7" output $primaryMonitor
+workspace "$work8" output $primaryMonitor
+workspace "$work9" output $primaryMonitor
+workspace "$work10" output $secondaryMonitor
+#workspace "$work10" output HDMI1
 workspace_auto_back_and_forth yes
 
 # Windows Assigns
 assign [class="^Firefox$" instance="^Navigator$"] → $work1
 assign [class="^Chromium$" instance="^chromium$"] → $work1
-assign [class="^Google-chrome-stable$" instance="^Google-chrome-stable$"] → $work1
-assign [class="^Opera$"] → $work1
-assign [class="^Evolution$" instance="^evolution$"] → $work1
+#assign [class="^Google-chrome$"] → $work1
+assign [class="^Opera$" instance="^Opera$"] → $work1
+assign [class="^Evolution$" instance="^evolution$"] → $work2
 assign [class="^Dwb$" instance="^dwb$"] → $work1
 
+assign [class="^Iceweasel$"] → $work2
 
-assign [class="^Empathy$" instance="^empathy$"] → $work7
+
+assign [class="^Empathy$"] → $work7
 assign [class="^Skype$" instance="^skype$"] → $work7
 assign [class="^Xchat$" instance="^xchat$"] → $work7
 
 
 #assign [class="^Gvim$" instance="^gvim$"] → $work6
 assign [class="^Texstudio$" instance="^texstudio$"] → $work6
+assign [class="^NetBeans IDE 8.0"] → $work5
+assign [class="^Eclipse$"] → $work6
 
+assign [class="Gnome-terminal"] → $work4
+#assign [class="URxvt"] → $work4
 
 assign [class="^Vlc$" instance="^vlc$"] → $work3
 
@@ -261,11 +287,13 @@ assign [class="^Vlc$" instance="^vlc$"] → $work3
 #for_window [class="^Chromium$" instance="^chromium$"] border none
 #for_window [class="^Firefox$" instance="^Navigator$"] border none
 #
-for_window [class="Xfce4-notifyd"] floating enable; border none
+#for_window [class="Xfce4-notifyd"] floating enable; border none
 for_window [class="Wine"] floating enable
 for_window [class="^Google-chrome-stable$"] border none
 for_window [class="Opera"] border none
 for_window [class="Dwb"] border none
+#for_window [class="Gnome-terminal"] border none
+#for_window [class="URxvt"] border none
 
 # Focus
 focus_follows_mouse no
@@ -304,7 +332,7 @@ bindsym $mod+numbersign exec amixer -q sset Master toggle
 
 
 # Monitor Switch Binding
-#bindsym $mod+m exec ~/.i3/screens
+bindsym $mod+Shift+m exec ~/.i3/screens
 
 # Sound-output Switch Binding
 #bindsym $mod+n exec switch-sound-output.sh
@@ -318,26 +346,28 @@ bindsym Print exec scrot ~/Bilder/Screenshot/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym $mod+Print exec sleep 1 && scrot -s ~/Bilder/Screenshot/screenshot_%Y_%m_%d_%H_%M_%S.png
 
 
-# Bildschirmhelligkeit aendern
-#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-#bindcode 232 exec xbacklight -dec 10
-bindsym $mod+Shift+b exec xbacklight -dec 10
-
-#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-#bindcode 233 exec xbacklight -inc 10
-bindsym $mod+b exec xbacklight -inc 10
-
 # Exec
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id nm-applet
 exec --no-startup-id xset dpms 1200 1200 1200
 exec --no-startup-id xset s 1200 1200
+
 #Aktivieren des Bildschirmschoners mit dem angegebenem Bild.
 #exec --no-startup-id xss-lock -- i3lock -b -t -i ~/Bilder/Wallpaper/Arch/wallpaper-two.png
 
 # Aktiviere numlock beim start
 exec --no-startup-id /usr/bin/numlockx on
 
-exec --no-startup-id dropboxd
+# Cryptkeeper für die ent-/verschlüsselung von ENCFS dateisystemen
+exec --no-startup-id /usr/bin/cryptkeeper
+
+# Damit beim starten der Schlüsselbund entsperrt wird.
+#exec --no-startup-id /usr/bin/seahorse
+
+exec --no-startup-id /usr/bin/dropbox start
+
+# Start Empathy-Messenger for the Consistec Jabber communication
+exec --no-startup-id /usr/bin/empathy
+
+# Start GUAKE, the drop-down terminal application
+exec --no-startup-id /usr/bin/guake
